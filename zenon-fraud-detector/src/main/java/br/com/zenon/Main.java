@@ -1,17 +1,19 @@
 package br.com.zenon;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.math.BigDecimal;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main {
+    void main() {
+       var t1 = new Transaction(1,TransectionType.PAYMENT, new BigDecimal("9838.64"),
+                new TransactionCustomer("C1231006815", new BigDecimal("170136.0"), new BigDecimal("160296.32")),
+                new TransactionCustomer("M1979787155", new BigDecimal("0.0"), new BigDecimal("0.0")),
+        false, false);
+        var t2 = new Transaction(743,TransectionType.CASH_OUT, new BigDecimal("850002.52"),
+                new TransactionCustomer("C1231006815", new BigDecimal("850002.52"), new BigDecimal("0.0")),
+                new TransactionCustomer("M1979787155", new BigDecimal("651099.11"), new BigDecimal("7360101.63")),
+                true, false);
+        IO.println(t1.toString());
+        IO.println(t2.toString());
+
     }
 }
