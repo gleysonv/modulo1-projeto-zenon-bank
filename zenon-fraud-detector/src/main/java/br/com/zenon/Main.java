@@ -27,5 +27,21 @@ public class Main {
         transactions.stream()
                 .limit(10)
                 .forEach(IO::println);
+
+        IO.println("------------------TRATAMENTO DE ERROS EM ARQUIVO---------------------");
+
+        var transactionBadDataIngestor = new TransactionIngestor();
+
+        List<Transaction> transactionsBad =
+                transactionBadDataIngestor.read("data/PS_Analise_de_erros_em_arquivo_log.csv");
+
+        IO.println(transactionsBad.size());
+
+        transactionsBad.stream()
+                .limit(10)
+                .forEach(IO::println);
+
     }
+
+
 }
