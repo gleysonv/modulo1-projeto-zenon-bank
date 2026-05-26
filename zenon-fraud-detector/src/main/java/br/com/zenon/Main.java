@@ -2,6 +2,7 @@ package br.com.zenon;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     void main() {
@@ -40,6 +41,32 @@ public class Main {
         transactionsBad.stream()
                 .limit(10)
                 .forEach(IO::println);
+
+     IO.println("------------------ANALISE DE TRANSAÇÕES---------------------");
+     var fraudAnalyzer = new FraudeAnalyzer(transactions);
+
+     long fraudCount = fraudAnalyzer.countFrauds();
+     IO.println("Total de fraudes = " + fraudCount);
+
+
+     IO.println("Top 3 fraudes  de maior valor");
+     List<BigDecimal> hishestFraudAmoubts = fraudAnalyzer.findHighestValueFraudAmounts(3);
+     //esse é nova pra mim! kkkkk 1 linha só! meu Deus!
+     hishestFraudAmoubts.forEach(amount -> IO.println("- %.2f".formatted(amount)));
+     // vou explicar essa pra fixar melhor:
+     // estou pegando da lista hishestFrauds uma sublista só com amount
+     // ai faço um laço pra pintar os amount;
+
+     List<String> suspiciousClients = fraudAnalyzer.findTopSuspiciousClients(5);
+     IO.println("top 5 clientes suspeitos");
+     suspiciousClients.forEach(IO::println);
+
+      BigDecimal totalFraudLoss =   fraudAnalyzer.cauculateTotalFraudLoss();
+      IO.println("Prejuizo total = " + totalFraudLoss);
+
+      Map<TransectionType, Long> fraudCountByType =fraudAnalyzer.countFraudsByType();
+       IO.println("fraudes por tipo: ");
+       fraudCountByType.forEach(( type, count) -> IO.println("- %s: %d".formatted(type, count)));
 
     }
 
